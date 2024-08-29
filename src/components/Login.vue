@@ -5,6 +5,7 @@ import {useUserStore} from "../store/useUserStore.ts";
 import {User} from "../interface/DataInterface.ts";
 import {showFailToast, showLoadingToast, showSuccessToast} from "vant";
 import axios from 'axios'
+import {BASE_URL} from "../Constants.ts";
 
 const uid = ref('');
 const pwd = ref('');
@@ -15,7 +16,7 @@ const onSubmit = async (values: User) => {
     forbidClick: true,
     duration:10000
   })
-  const res = await axios.post("/api/user/login",{
+  const res = await axios.post(`${BASE_URL}/api/user/login`,{
     uid:values.uid,
     pwd:values.pwd
   })
