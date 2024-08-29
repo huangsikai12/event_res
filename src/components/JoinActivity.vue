@@ -74,12 +74,7 @@ const finished = ref(true);
 //     }
 //   }, 1000);
 // };
-const joinActivity=(item:Activity)=>{
-  showToast(`成功报名活动${item.id}`);
-  joinIdList.value.push(item.id)
-  item.joinCount ++
-  //todo:发送请求
-}
+
 const cancelActivity=(item:Activity)=>{
   showToast(`成功取消报名${item.id}`);
   joinIdList.value = joinIdList.value.filter(value=>value!=item.id)
