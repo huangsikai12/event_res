@@ -9,6 +9,7 @@ export default defineConfig({
     proxy:{
       "/api":{
         target:"http://event.huangsikai.top",
+        changeOrigin: true,
         rewrite: (path) => path.replace(/\/api/, ''), //重写真实路径,替换/api
       }
     }
