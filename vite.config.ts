@@ -8,7 +8,7 @@ export default defineConfig({
     port:5174,
     proxy:{
       "/api":{
-        target:"http://127.0.0.1:1111",
+        target:"http://event.huangsikai.top",
         rewrite: (path) => path.replace(/\/api/, ''), //重写真实路径,替换/api
       }
     }
