@@ -15,7 +15,8 @@ const list = ref([
     joinCount:1,
     totalCount:100,
     place:"教室",
-    status:0
+    status:0,
+    signPwd:""
   },
   {
     id: 2,
@@ -25,7 +26,8 @@ const list = ref([
     joinCount:1,
     totalCount:100,
     place:"教室",
-    status:0
+    status:0,
+    signPwd:""
   },
   {
     id: 3,
@@ -35,7 +37,8 @@ const list = ref([
     joinCount:1,
     totalCount:100,
     place:"教室",
-    status:0
+    status:0,
+    signPwd:""
   },
   {
     id: 4,
@@ -45,7 +48,8 @@ const list = ref([
     joinCount:1,
     totalCount:100,
     place:"教室",
-    status:0
+    status:0,
+    signPwd:""
   },
   {
     id: 5,
@@ -55,7 +59,8 @@ const list = ref([
     joinCount:1,
     totalCount:100,
     place:"教室",
-    status:0
+    status:0,
+    signPwd:""
   },
   {
     id: 6,
@@ -65,7 +70,8 @@ const list = ref([
     joinCount:1,
     totalCount:100,
     place:"教室",
-    status:0
+    status:0,
+    signPwd:""
   },
   {
     id: 7,
@@ -75,7 +81,8 @@ const list = ref([
     joinCount:1,
     totalCount:100,
     place:"教室",
-    status:0
+    status:0,
+    signPwd:""
   },
   {
     id: 8,
@@ -85,7 +92,9 @@ const list = ref([
     joinCount:1,
     totalCount:100,
     place:"教室",
-    status:0
+    status:0,
+    signPwd:""
+
   },
 ]);
 const loading = ref(false);
