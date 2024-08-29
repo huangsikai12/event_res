@@ -6,22 +6,6 @@ import {User} from "../interface/DataInterface.ts";
 import {showFailToast, showLoadingToast, showSuccessToast} from "vant";
 import axios from 'axios'
 
-const user :User={
-  id:1,
-  phone:"18816596961",
-  name:"张三",
-  uid:"1",
-  pwd:"1",
-  roleId:1
-}
-// const user_admin :User={
-//   id:2,
-//   phone:"18816596961",
-//   name:"张三",
-//   uid:"22104540100",
-//   pwd:"123456",
-//   roleId:1
-// }
 const uid = ref('');
 const pwd = ref('');
 const userStore = useUserStore()
