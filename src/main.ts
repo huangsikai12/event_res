@@ -6,12 +6,12 @@ import {
     Button,
     Cell,
     CellGroup,
-    ContactCard,
+    ContactCard, DatePicker,
     Field,
     Form,
     List, NavBar,
     NoticeBar, Popup,
-    PullRefresh, Sticky,
+    PullRefresh, Stepper, Sticky, Switch,
     Tab,
     Tabs,
     Tag,
@@ -38,5 +38,8 @@ app.use(Field);
 app.use(router)
 app.use(NavBar);
 app.use(Popup);
+app.use(Stepper);
+app.use(DatePicker);
+app.use(Switch);
 app.use(createPinia().use(persist))
 app.mount('#app')

@@ -1,13 +1,14 @@
-export interface Activity{
-    id:number;
-    title:string;
-    time:string;
-    description:string;
-    joinCount:number;
-    totalCount:number;
-    place:string;
-    status:number,
-    signPwd:string,
+export class Activity{
+    "id":number;
+    "title":string;
+    "time":string;
+    "description":string;
+    "joinCount":number;
+    "totalCount":number;
+    "place":string;
+    "status":number;
+    "signPwd":string;
+    "userStatus":number
 
 }
 export interface User
@@ -23,6 +24,10 @@ export interface JoinedInfo
 {
     id:number;
     uid:number;
-    event_id:number;
+    eid:number;
     status:number;
+}
+export interface DateTimePickerValue
+{
+    selectedValues:Array<string>;
 }
