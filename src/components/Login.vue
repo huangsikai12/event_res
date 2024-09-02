@@ -16,7 +16,7 @@ const onSubmit = async (values: User) => {
     forbidClick: true,
     duration:10000
   })
-  const res = await axios.post(`${BASE_URL}/api/user/login`,{
+  const res = await axios.post(`${BASE_URL}/user/login`,{
     uid:values.uid,
     pwd:values.pwd
   })

@@ -18,5 +18,11 @@ export interface User
     phone:string;
     pwd:string;
     roleId:number;
-
+}
+export interface JoinedInfo
+{
+    id:number;
+    uid:number;
+    event_id:number;
+    status:number;
 }

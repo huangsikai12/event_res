@@ -1,102 +1,40 @@
 <script setup lang="ts" xmlns="http://www.w3.org/1999/html">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {showToast} from "vant";
-import {Activity} from "../interface/DataInterface.ts";
+import {Activity, JoinedInfo} from "../interface/DataInterface.ts";
 import {useUserStore} from "../store/useUserStore.ts";
+import axios from "axios";
+import {BASE_URL} from "../Constants.ts";
 const userStore = useUserStore()
 const user = userStore.user
-const joinIdList = ref([1,2,3])
-const list = ref([
-  {
-    id: 1,
-    title:"测试",
-    time:"2024-11-11 18:00:00",
-    description:"这是一个活动",
-    joinCount:1,
-    totalCount:100,
-    place:"教室",
-    status:0,
-    signPwd:""
-  },
-  {
-    id: 2,
-    title:"测试",
-    time:"2024-11-11",
-    description:"这是一个活动",
-    joinCount:1,
-    totalCount:100,
-    place:"教室",
-    status:0,
-    signPwd:""
-  },
-  {
-    id: 3,
-    title:"测试",
-    time:"2024-11-11",
-    description:"这是一个活动",
-    joinCount:1,
-    totalCount:100,
-    place:"教室",
-    status:0,
-    signPwd:""
-  },
-  {
-    id: 4,
-    title:"测试",
-    time:"2024-11-11",
-    description:"这是一个活动",
-    joinCount:1,
-    totalCount:100,
-    place:"教室",
-    status:0,
-    signPwd:""
-  },
-  {
-    id: 5,
-    title:"测试",
-    time:"2024-11-11",
-    description:"这是一个活动",
-    joinCount:1,
-    totalCount:100,
-    place:"教室",
-    status:0,
-    signPwd:""
-  },
-  {
-    id: 6,
-    title:"测试",
-    time:"2024-11-11",
-    description:"这是一个活动",
-    joinCount:1,
-    totalCount:100,
-    place:"教室",
-    status:0,
-    signPwd:""
-  },
-  {
-    id: 7,
-    title:"测试",
-    time:"2024-11-11",
-    description:"这是一个活动",
-    joinCount:1,
-    totalCount:100,
-    place:"教室",
-    status:0,
-    signPwd:""
-  },
-  {
-    id: 8,
-    title:"测试",
-    time:"2024-11-11",
-    description:"这是一个活动",
-    joinCount:1,
-    totalCount:100,
-    place:"教室",
-    status:0,
-    signPwd:""
+const joinIdList = ref<Array<number>>([])
+const list = ref<Array<Activity>>([]);
+const getActivityList =async () => {
+  const data = await axios.get(`${BASE_URL}/event/all`)
+  console.log(data)
+  if (data.data.data != null) {
+    list.value = data.data.data
+  }
+  console.log(list)
 
-  },
-]);
+}
+const getUserJoin =async () => {
+
+  joinIdList.value = []
+  const data = await axios.get(`${BASE_URL}/join/get/user?uid=${user.uid}`)
+  console.log(data)
+  if (data.data.data != null) {
+    data.data.data.forEach((join_data:JoinedInfo)=>{
+      joinIdList.value.push(join_data.event_id)
+    })
+  }
+  console.log(list)
+
+}
+onMounted(()=>{
+  getActivityList()
+  getUserJoin()
+})
 const loading = ref(false);
 const finished = ref(true);
 // const onLoad = () => {
@@ -114,17 +52,32 @@ const finished = ref(true);
 //     }
 //   }, 1000);
 // };
-const joinActivity=(item:Activity)=>{
-  showToast(`成功报名活动${item.id}`);
-  joinIdList.value.push(item.id)
-  item.joinCount ++
-  //todo:发送请求
+const joinActivity=async (item: Activity) => {
+  const res = await axios.get(`${BASE_URL}/join/add?uid=${user.id}&eid=${item.id}`)
+  if (res!=null)
+  {
+    showToast(`报名成功！`);
+    await getActivityList()
+    await getUserJoin()
+  }
+  else
+  {
+    showToast(`报名失败！`);
+  }
+
+
+
 }
-const cancelActivity=(item:Activity)=>{
-  showToast(`成功取消报名${item.id}`);
-  joinIdList.value = joinIdList.value.filter(value=>value!=item.id)
-  item.joinCount --
-  //todo:发送请求
+const cancelActivity=async (item: Activity) => {
+  const res = await axios.get(`${BASE_URL}/join/cancel?uid=${user.id}&eid=${item.id}`)
+  if (res != null) {
+    showToast(`取消报名成功！`);
+    await getActivityList()
+    await getUserJoin()
+  } else {
+    showToast(`取消报名失败！`);
+  }
+
 }
 
 
