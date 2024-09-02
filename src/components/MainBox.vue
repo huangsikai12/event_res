@@ -9,7 +9,7 @@
     <van-tabs v-model:active="active">
       <van-tab title="活动列表"><ActivityLIst></ActivityLIst></van-tab>
       <van-tab title="已报名活动"><JoinActivity></JoinActivity></van-tab>
-      <van-tab title="我的"><PersonInfomation></PersonInfomation></van-tab>
+      <van-tab title="我的"><PersonInformation></PersonInformation></van-tab>
     </van-tabs>
 
   </div>
@@ -19,7 +19,7 @@
 import { ref } from 'vue';
 import ActivityLIst from "./ActivityLIst.vue";
 import JoinActivity from "./JoinActivity.vue";
-import PersonInfomation from "./PersonInfomation.vue";
+import PersonInformation from "./PersonInformation.vue";
 const active = ref(0);
 
 </script>
