@@ -114,7 +114,7 @@ const beforeSign=(item:Activity)=>{
         <template #title>
           <span  style="margin-right: 10px" class="custom-title">{{item.title}}</span>
           <van-tag type="primary">
-            {{ item.time }}
+            {{ item.time.length<7?"长期活动":item.time }}
           </van-tag>
         </template>
         <template #extra>

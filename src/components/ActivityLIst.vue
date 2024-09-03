@@ -49,10 +49,11 @@ const getUserJoin =async () => {
   console.log(list)
 
 }
-onMounted(()=>{
-  getActivityList()
-  getUserJoin()
+onMounted(async ()=>{
+  await getActivityList()
+  await getUserJoin()
 })
+
 
 const loading = ref(false);
 const data_loading = ref(false);
@@ -235,6 +236,16 @@ const deleteActivity =(id:number)=>{
       });
 
 }
+const onLoad =async ()=>{
+
+  if (refreshing.value) {
+    list.value = [];
+    refreshing.value = false;
+  }
+  await getActivityList()
+  await getUserJoin()
+
+}
 
 const copyUid=async () => {
   showLoadingToast("正在复制。。。。。。")
@@ -274,6 +285,7 @@ const copyUid=async () => {
           v-model:loading="loading"
           :finished="finished"
           finished-text="没有更多了"
+          @load="onLoad"
       >
         <van-cell v-for="item in joinList" :key="item.uid" :title="item.name">
           <template  #right-icon>
@@ -404,7 +416,7 @@ const copyUid=async () => {
           <template #title>
             <span  style="margin-right: 10px" class="custom-title">{{item.title}}</span>
             <van-tag type="primary">
-              {{ item.time=="0"?"长期活动":item.time }}
+              {{ item.time.length<7?"长期活动":item.time }}
             </van-tag>
           </template>
           <template  #right-icon>
