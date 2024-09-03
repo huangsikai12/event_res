@@ -9,7 +9,7 @@ import {
     ContactCard, DatePicker,
     Field,
     Form,
-    List, NavBar,
+    List, Loading, NavBar,
     NoticeBar, Popup,
     PullRefresh, Stepper, Sticky, Switch,
     Tab,
@@ -41,5 +41,6 @@ app.use(Popup);
 app.use(Stepper);
 app.use(DatePicker);
 app.use(Switch);
+app.use(Loading);
 app.use(createPinia().use(persist))
 app.mount('#app')

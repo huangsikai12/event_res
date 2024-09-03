@@ -12,7 +12,7 @@ const signPwd = ref("")
 const signEventId = ref(0)
 
 //活动状态 0:待开始 1:正在开始 2:已结束 3:已同步
-//用户状态 0:未签到 1:已签到
+//用户状态 0:未签到 1:已签到 2:未登录签到
 const list = ref<Array<Activity>>([]);
 const loading = ref(false);
 const finished = ref(true);
@@ -21,7 +21,7 @@ const getUserJoinActivity =async () => {
   const res = await axios.get(`${BASE_URL}/join/get/user/detail?uid=${user.uid}`)
   console.log(res)
   if (res.data.data != null) {
-    list.value =res.data.data
+    list.value =res.data.data.reverse()
   }
   console.log(list)
 
@@ -41,6 +41,11 @@ const cancelActivity=async (item: Activity) => {
 onMounted(()=>{
   getUserJoinActivity()
 })
+
+const onRefresh = async () => {
+  await getUserJoinActivity()
+  loading.value = false
+}
 
 const verSignPwd=async () => {
   if(signPwd.value=="")
@@ -98,11 +103,14 @@ const beforeSign=(item:Activity)=>{
       </div>
     </template>
   </van-popup>
+  <van-pull-refresh
+      v-model="loading"
+      @refresh="onRefresh()"
+      success-text="刷新成功">
   <van-list
       v-model:loading="loading"
       :finished="finished"
       finished-text="没有更多了"
-      style="height: 40px;"
   >
     <van-cell-group v-for="item in list" :key="item.id">
       <van-cell >
@@ -132,6 +140,7 @@ const beforeSign=(item:Activity)=>{
       </van-cell>
     </van-cell-group>
   </van-list>
+  </van-pull-refresh>
 
 </template>
 

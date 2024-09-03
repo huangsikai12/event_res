@@ -6,6 +6,7 @@ import {useUserStore} from "../store/useUserStore.ts";
 import axios from "axios";
 import { showConfirmDialog } from 'vant';
 import {BASE_URL} from "../Constants.ts";
+
 const userStore = useUserStore()
 const user = userStore.user
 const setPwdShow = ref(false)
@@ -54,12 +55,19 @@ onMounted(async ()=>{
   await getUserJoin()
 })
 
+const onRefresh= () => {
+  console.log(222)
+   getActivityList()
+   getUserJoin()
+  loading.value = false
+
+}
 
 const loading = ref(false);
-const data_loading = ref(false);
+// const loading = ref(false);
 const finished = ref(true);
 const joinActivity=async (item: Activity) => {
-  data_loading.value = true
+  loading.value = true
   const res = await axios.get(`${BASE_URL}/join/add?uid=${user.id}&eid=${item.id}`)
   if (res!=null)
   {
@@ -71,7 +79,7 @@ const joinActivity=async (item: Activity) => {
   {
     showToast(`报名失败！`);
   }
-  data_loading.value = false
+  loading.value = false
 
 }
 
@@ -103,7 +111,7 @@ const setSignPwd=()=>{
 }
 const cancelActivity=async (item: Activity) => {
   showLoadingToast("取消中......")
-  data_loading.value = true
+  loading.value = true
   const res = await axios.get(`${BASE_URL}/join/cancel?uid=${user.id}&eid=${item.id}`)
   if (res != null) {
     showToast(`取消报名成功！`);
@@ -112,7 +120,7 @@ const cancelActivity=async (item: Activity) => {
   } else {
     showToast(`取消报名失败！`);
   }
-  data_loading.value = false
+  loading.value = false
 
 }
 const addActivity=async () => {
@@ -236,16 +244,6 @@ const deleteActivity =(id:number)=>{
       });
 
 }
-const onLoad =async ()=>{
-  //
-  // if (refreshing.value) {
-  //   list.value = [];
-  //   refreshing.value = false;
-  // }
-  // await getActivityList()
-  // await getUserJoin()
-
-}
 
 const copyUid=async () => {
   showLoadingToast("正在复制。。。。。。")
@@ -282,10 +280,9 @@ const copyUid=async () => {
         </template>
       </van-cell>
       <van-list
-          v-model:loading="loading"
+
           :finished="finished"
           finished-text="没有更多了"
-          @load="onLoad"
       >
         <van-cell v-for="item in joinList" :key="item.uid" :title="item.name">
           <template  #right-icon>
@@ -400,34 +397,36 @@ const copyUid=async () => {
   </van-popup>
   </van-form>
   <van-button  v-if="user.roleId == 1" @click="addActivityPop= true" type="primary">注册活动</van-button>
-    <van-list
-        v-model:loading="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        style="height: 40px;"
-    >
-      <van-cell-group v-for="item in list" :key="item.id">
-        <van-cell >
-          <template #label>
-            地点：{{item.place}}
-            <br>
-            {{item.description}}
-          </template>
-          <template #title>
-            <span  style="margin-right: 10px" class="custom-title">{{item.title}}</span>
-            <van-tag type="primary">
-              {{ item.time.length<7?"长期活动":item.time }}
-            </van-tag>
-          </template>
-          <template  #right-icon>
-<!--            <span style="margin-right: 10px">{{item.joinCount}}/{{item.totalCount}}</span>-->
-          </template>
-          <template #extra>
+  <van-loading v-if="loading" color="#0094ff" size="50px">加载中...</van-loading>
+    <van-pull-refresh
+        v-model="loading"
+        @refresh="onRefresh"
+        success-text="刷新成功">
+      <van-list
+          v-if="!loading"
+          finished-text="没有更多了">
+        <van-cell-group v-for="item in list" :key="item.id">
+          <van-cell >
+            <template #label>
+              地点：{{item.place}}
+              <br>
+              {{item.description}}
+            </template>
+            <template #title>
+              <span  style="margin-right: 10px" class="custom-title">{{item.title}}</span>
+              <van-tag type="primary">
+                {{ item.time.length<7?"长期活动":item.time }}
+              </van-tag>
+            </template>
+            <template  #right-icon>
+              <!--            <span style="margin-right: 10px">{{item.joinCount}}/{{item.totalCount}}</span>-->
+            </template>
+            <template #extra>
 
-          </template>
-        </van-cell>
-        <van-cell>
-            <template #title v-if="!data_loading">
+            </template>
+          </van-cell>
+          <van-cell>
+            <template #title>
               <van-button v-if="item.status !=0" disabled type="success">报名结束</van-button>
               <template v-else>
                 <van-button v-if="!joinIdList.includes(item.id)" @click="joinActivity(item)" type="success" >点击报名</van-button>
@@ -443,14 +442,19 @@ const copyUid=async () => {
               <br>
 
               <van-button  v-if="item.status == 0 &&user.roleId==1" @click="setPwdShow = true;setPwdEventID=item.id" type="primary">设置签到码并开始</van-button>
-<!--              <van-button v-if="item.status==0 &&user.roleId==1" type="warning" @click="chageActivityStatus(item.id,1,'开始活动')">开始活动</van-button>-->
+              <!--              <van-button v-if="item.status==0 &&user.roleId==1" type="warning" @click="chageActivityStatus(item.id,1,'开始活动')">开始活动</van-button>-->
               <van-button v-if="item.status==1 &&user.roleId==1" @click="changeActivityStatus(item.id,2,'结束活动')" type="warning">结束活动</van-button>
               <van-button v-if="item.status==2 &&user.roleId==1"  @click="changeActivityStatus(item.id,3,'同步活动')" type="warning">同步活动</van-button>
             </template>
 
-        </van-cell>
-      </van-cell-group>
-    </van-list>
+          </van-cell>
+        </van-cell-group>
+      </van-list>
+    </van-pull-refresh>
+
+
+
+
 
 </template>
 
