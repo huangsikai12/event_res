@@ -1,7 +1,7 @@
 <script setup lang="ts" xmlns="http://www.w3.org/1999/html">
 import {onMounted, ref} from "vue";
-import {showFailToast, showLoadingToast, showToast} from "vant";
-import {Activity, DateTimePickerValue, JoinedInfo} from "../interface/DataInterface.ts";
+import {showFailToast, showLoadingToast, showSuccessToast, showToast} from "vant";
+import {Activity, DateTimePickerValue, JoinedInfo, User} from "../interface/DataInterface.ts";
 import {useUserStore} from "../store/useUserStore.ts";
 import axios from "axios";
 import { showConfirmDialog } from 'vant';
@@ -9,6 +9,7 @@ import {BASE_URL} from "../Constants.ts";
 const userStore = useUserStore()
 const user = userStore.user
 const setPwdShow = ref(false)
+const setPeekJoinShow = ref(false)
 const longtimeActivity = ref(false)
 const date_result = ref("0");
 const time_result = ref<Array<number>>([0,0,0]);
@@ -21,6 +22,7 @@ const onConfirm = ({selectedValues:selectedValues}:DateTimePickerValue) =>{
 const setPwdEventID = ref(0)
 const joinIdList = ref<Array<number>>([])
 const list = ref<Array<Activity>>([]);
+const joinList = ref<Array<User>>([]);
 const newActivity = ref<Activity>(new Activity())
 const getActivityList =async () => {
   const data = await axios.get(`${BASE_URL}/event/all`)
@@ -157,6 +159,21 @@ const changeActivityStatus=(id:number,status:number,title:string)=>
       });
 
 }
+const getEventJoinUser=async (id: number) => {
+
+  showLoadingToast("加载中")
+  const res = await axios.get(`${BASE_URL}/join/get/event/join?eid=${id}`)
+
+  if (res.data!=null)
+  {
+   showSuccessToast("获取成功")
+    joinList.value = res.data.data
+    setPeekJoinShow.value = true
+  }else
+  {
+    showFailToast("获取失败")
+  }
+}
 
 const deleteActivity =(id:number)=>{
   showConfirmDialog({
@@ -186,6 +203,24 @@ const deleteActivity =(id:number)=>{
 </script>
 
 <template>
+
+  <van-popup
+      v-model:show="setPeekJoinShow"
+      closeable
+      position="bottom"
+      :style="{ height: '100%' }"
+  >
+    <template #default>
+      <h3 style="width: 100%;text-align: center;margin: 0;height: 50px;line-height: 50px">查看报名人数</h3>
+      <van-list
+          v-model:loading="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+      >
+        <van-cell v-for="item in joinList" :key="item.uid" :title="item.name" />
+      </van-list>
+    </template>
+  </van-popup>
 
   <van-popup
       v-model:show="setPwdShow"
@@ -298,7 +333,7 @@ const deleteActivity =(id:number)=>{
                 <van-button v-else type="danger"  @click="cancelActivity(item)">取消报名</van-button>
                 <van-button v-if="user.roleId == 1" type="warning" @click="deleteActivity(item.id)">下架活动</van-button>
               </template>
-              <van-button  v-if="user.roleId == 1"type="primary">查看报名</van-button>
+              <van-button  v-if="user.roleId == 1" @click ="getEventJoinUser(item.id)" type="primary">查看报名</van-button>
 
               <template v-if="item.status !=0 &&user.roleId==1">
                 <br >
