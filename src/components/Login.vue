@@ -63,7 +63,13 @@ const onSubmit = async (values: User) => {
         登录
       </van-button>
     </div>
+
   </van-form>
+  <div style="margin: 16px;">
+    <van-button round block type="primary" native-type="submit">
+      无登录状态签到
+    </van-button>
+  </div>
 </template>
 
 <style scoped>

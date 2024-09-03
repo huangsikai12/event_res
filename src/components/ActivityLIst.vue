@@ -10,6 +10,7 @@ const userStore = useUserStore()
 const user = userStore.user
 const setPwdShow = ref(false)
 const setPeekJoinShow = ref(false)
+const setPeekSignShow = ref(false)
 const longtimeActivity = ref(false)
 const date_result = ref("0");
 const time_result = ref<Array<number>>([0,0,0]);
@@ -28,7 +29,7 @@ const getActivityList =async () => {
   const data = await axios.get(`${BASE_URL}/event/all`)
   console.log(data)
   if (data.data.data != null) {
-    list.value = data.data.data
+    list.value = data.data.data.reverse()
   }
   console.log(list)
 
@@ -114,6 +115,11 @@ const cancelActivity=async (item: Activity) => {
 
 }
 const addActivity=async () => {
+  if (date_result.value == "0" && longtimeActivity.value == false)
+  {
+    showFailToast("日期是必填的")
+    return
+  }
   date_result.value += (`  ${time_result.value[0]}:${time_result.value[0]}`)
   newActivity.value.time = date_result.value
   const res = await axios.post(`${BASE_URL}/event/add`, {
@@ -135,6 +141,7 @@ const addActivity=async () => {
   await getActivityList()
   await getUserJoin()
   addActivityPop.value = false
+  date_result.value = "0"
 
 
 }
@@ -159,16 +166,47 @@ const changeActivityStatus=(id:number,status:number,title:string)=>
       });
 
 }
+const getEventSignUser=async (id: number) => {
+
+  joinList.value = []
+  showLoadingToast("加载中")
+  const res = await axios.get(`${BASE_URL}/join/get/event/join?eid=${id}&status=1`)
+
+  if (res.data!=null)
+  {
+    if (res.data.data.length>0)
+    {
+      showSuccessToast("获取成功")
+      joinList.value = res.data.data
+      setPeekSignShow.value = true
+    }else
+    {
+      showFailToast("签到人数为空")
+    }
+
+  }else
+  {
+    showFailToast("获取失败")
+  }
+}
 const getEventJoinUser=async (id: number) => {
 
+  joinList.value = []
   showLoadingToast("加载中")
   const res = await axios.get(`${BASE_URL}/join/get/event/join?eid=${id}`)
 
   if (res.data!=null)
   {
-   showSuccessToast("获取成功")
-    joinList.value = res.data.data
-    setPeekJoinShow.value = true
+    if (res.data.data.length>0)
+    {
+      showSuccessToast("获取成功")
+      joinList.value = res.data.data
+      setPeekJoinShow.value = true
+    }else
+    {
+      showFailToast("报名人数为空")
+    }
+
   }else
   {
     showFailToast("获取失败")
@@ -198,11 +236,53 @@ const deleteActivity =(id:number)=>{
 
 }
 
-
+const copyUid=async () => {
+  showLoadingToast("正在复制。。。。。。")
+  if (joinList.value.length > 0) {
+    try {
+      let t = ""
+      joinList.value.forEach((u)=>{
+        t+=(u.uid+"\n")
+      })
+      await navigator.clipboard.writeText(t);
+      showSuccessToast('文本已复制到剪贴板');
+    } catch (err) {
+      showFailToast(`无法复制文本:${err} `);
+    }
+  }
+}
 
 </script>
 
 <template>
+
+  <van-popup
+      v-model:show="setPeekSignShow"
+      closeable
+      position="bottom"
+      :style="{ height: '100%' }"
+  >
+    <template #default>
+      <h3 style="width: 100%;text-align: center;margin: 0;height: 50px;line-height: 50px">查看签到人数</h3>
+      <van-button type="primary" style="align-self: center" @click="copyUid()">一键复制学号<br>(二课导入格式)</van-button>
+      <van-cell title="姓名">
+        <template  #right-icon>
+          <span style="margin-right: 10px">学号</span>
+        </template>
+      </van-cell>
+      <van-list
+          v-model:loading="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+      >
+        <van-cell v-for="item in joinList" :key="item.uid" :title="item.name">
+          <template  #right-icon>
+            <span style="margin-right: 10px">{{item.uid}}</span>
+          </template>
+        </van-cell>
+      </van-list>
+    </template>
+  </van-popup>
 
   <van-popup
       v-model:show="setPeekJoinShow"
@@ -212,16 +292,25 @@ const deleteActivity =(id:number)=>{
   >
     <template #default>
       <h3 style="width: 100%;text-align: center;margin: 0;height: 50px;line-height: 50px">查看报名人数</h3>
+      <van-button type="primary" style="align-self: center" @click="copyUid()">一键复制学号<br>(二课导入格式)</van-button>
+      <van-cell title="姓名">
+        <template  #right-icon>
+          <span style="margin-right: 10px">学号</span>
+        </template>
+      </van-cell>
       <van-list
           v-model:loading="loading"
           :finished="finished"
           finished-text="没有更多了"
       >
-        <van-cell v-for="item in joinList" :key="item.uid" :title="item.name" />
+        <van-cell v-for="item in joinList" :key="item.uid" :title="item.name">
+          <template  #right-icon>
+            <span style="margin-right: 10px">{{item.uid}}</span>
+          </template>
+        </van-cell>
       </van-list>
     </template>
   </van-popup>
-
   <van-popup
       v-model:show="setPwdShow"
       closeable
@@ -319,7 +408,7 @@ const deleteActivity =(id:number)=>{
             </van-tag>
           </template>
           <template  #right-icon>
-            <span style="margin-right: 10px">{{item.joinCount}}/{{item.totalCount}}</span>
+<!--            <span style="margin-right: 10px">{{item.joinCount}}/{{item.totalCount}}</span>-->
           </template>
           <template #extra>
 
@@ -337,7 +426,7 @@ const deleteActivity =(id:number)=>{
 
               <template v-if="item.status !=0 &&user.roleId==1">
                 <br >
-                <van-button  color="#7232dd">查看签到人数</van-button>
+                <van-button  color="#7232dd" @click="getEventSignUser(item.id)">查看签到</van-button>
               </template>
               <br>
 
