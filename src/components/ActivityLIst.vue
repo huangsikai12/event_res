@@ -237,13 +237,13 @@ const deleteActivity =(id:number)=>{
 
 }
 const onLoad =async ()=>{
-
-  if (refreshing.value) {
-    list.value = [];
-    refreshing.value = false;
-  }
-  await getActivityList()
-  await getUserJoin()
+  //
+  // if (refreshing.value) {
+  //   list.value = [];
+  //   refreshing.value = false;
+  // }
+  // await getActivityList()
+  // await getUserJoin()
 
 }
 
