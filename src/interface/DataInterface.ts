@@ -31,3 +31,12 @@ export interface DateTimePickerValue
 {
     selectedValues:Array<string>;
 }
+export interface SelectedOptionsInter
+{
+    selectedOptions:Array<GeneralOptionsInter>;
+}
+export interface GeneralOptionsInter
+{
+    text:string,
+    values:string,
+}

@@ -4,22 +4,23 @@
 import {onMounted, ref} from "vue";
 import axios from "axios";
 import {BASE_URL} from "../Constants.ts";
+import {Activity, GeneralOptionsInter, SelectedOptionsInter} from "../interface/DataInterface.ts";
 
 const uid = ref()
-const select_event = ref({text:"",value:""})
+const select_event = ref<GeneralOptionsInter>({text:"",values:""})
 const showPicker = ref(false)
-const columns = ref([])
+const columns = ref([{}])
 onMounted(async ()=>{
   const res  = await axios.get(`${BASE_URL}/event/all?status=1`);
   if (res.data!=null)
   {
-    res.data.data.forEach((event)=>
+    res.data.data.forEach((event:Activity)=>
     {
       columns.value.unshift({text:event.title,value:event.id})
     })
   }
 })
-const onConfirm = ({ selectedOptions }) => {
+const onConfirm = ({ selectedOptions:selectedOptions}:SelectedOptionsInter) => {
   select_event.value = selectedOptions[0]
   showPicker.value = false;
 };
