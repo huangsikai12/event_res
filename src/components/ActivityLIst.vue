@@ -21,8 +21,8 @@ const onConfirm = ({selectedValues:selectedValues}:DateTimePickerValue) =>{
   showPicker.value = false;
 };
 
-const setPwdEventID = ref(0)
-const joinIdList = ref<Array<number>>([])
+const setPwdEventID = ref("0")
+const joinIdList = ref<Array<string>>([])
 const list = ref<Array<Activity>>([]);
 const joinList = ref<Array<User>>([]);
 const newActivity = ref<Activity>(new Activity())
@@ -41,13 +41,11 @@ const getUserJoin =async () => {
 
   joinIdList.value = []
   const res = await axios.get(`${BASE_URL}/join/get/user?uid=${user.uid}`)
-  console.log(res)
   if (res.data.data != null) {
     res.data.data.forEach((join_data:JoinedInfo)=>{
       joinIdList.value.push(join_data.eid)
     })
   }
-  console.log(list)
 
 }
 onMounted(async ()=>{
@@ -154,7 +152,7 @@ const addActivity=async () => {
 
 
 }
-const changeActivityStatus=(id:number,status:number,title:string)=>
+const changeActivityStatus=(id:string,status:number,title:string)=>
 {
   showConfirmDialog({
     title,
@@ -175,7 +173,7 @@ const changeActivityStatus=(id:number,status:number,title:string)=>
       });
 
 }
-const getEventSignUser=async (id: number) => {
+const getEventSignUser=async (id: string) => {
 
   joinList.value = []
   showLoadingToast("加载中")
@@ -198,7 +196,7 @@ const getEventSignUser=async (id: number) => {
     showFailToast("获取失败")
   }
 }
-const getEventJoinUser=async (id: number) => {
+const getEventJoinUser=async (id: string) => {
 
   joinList.value = []
   showLoadingToast("加载中")
@@ -222,7 +220,7 @@ const getEventJoinUser=async (id: number) => {
   }
 }
 
-const deleteActivity =(id:number)=>{
+const deleteActivity =(id:string)=>{
   showConfirmDialog({
     title: '删除活动',
     message:

@@ -9,7 +9,7 @@ const userStore = useUserStore()
 const user = userStore.user
 const verPwdShow = ref(false)
 const signPwd = ref("")
-const signEventId = ref(0)
+const signEventId = ref("0")
 
 //活动状态 0:待开始 1:正在开始 2:已结束 3:已同步
 //用户状态 0:未签到 1:已签到 2:未登录签到
@@ -53,7 +53,7 @@ const verSignPwd=async () => {
     showFailToast("签到码不能为空")
     return;
   }
-  if (signEventId.value == 0) {
+  if (signEventId.value == "0") {
     return;
   }
   //验证签到码

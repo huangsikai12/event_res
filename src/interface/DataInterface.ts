@@ -1,5 +1,5 @@
 export class Activity{
-    "id":number;
+    "id":string;
     "title":string;
     "time":string;
     "description":string;
@@ -23,8 +23,8 @@ export interface User
 export interface JoinedInfo
 {
     id:number;
-    uid:number;
-    eid:number;
+    uid:string;
+    eid:string;
     status:number;
 }
 export interface DateTimePickerValue
@@ -38,5 +38,5 @@ export interface SelectedOptionsInter
 export interface GeneralOptionsInter
 {
     text:string,
-    values:string,
+    value:string,
 }
