@@ -449,11 +449,11 @@ const copyUid=async () => {
               </template>
 
             </van-cell>
-            <template #right>
-              <van-button square type="danger" text="删除" />
-              <van-button square type="primary" text="收藏" />
+            <template #right v-if="user.roleId==1">
+              <van-button square @click="deleteActivity(item.id)" type="danger" style="height: 100%;margin: 0" text="删除" />
             </template>
           </van-swipe-cell>
+
 
         </van-cell-group>
       </van-list>

@@ -11,7 +11,7 @@ import {
     Form,
     List, Loading, NavBar,
     NoticeBar, Popup,
-    PullRefresh, Stepper, Sticky, Switch,
+    PullRefresh, Stepper, Sticky, SwipeCell, Switch,
     Tab,
     Tabs,
     Tag,
@@ -42,5 +42,6 @@ app.use(Stepper);
 app.use(DatePicker);
 app.use(Switch);
 app.use(Loading);
+app.use(SwipeCell);
 app.use(createPinia().use(persist))
 app.mount('#app')
