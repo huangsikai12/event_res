@@ -397,7 +397,7 @@ const copyUid=async () => {
   </van-popup>
   </van-form>
   <van-button  v-if="user.roleId == 1" @click="addActivityPop= true" type="primary">注册活动</van-button>
-  <van-loading v-if="loading" color="#0094ff" size="50px">加载中...</van-loading>
+  <van-skeleton v-if="loading" title :row="10" />
     <van-pull-refresh
         v-model="loading"
         @refresh="onRefresh"

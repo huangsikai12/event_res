@@ -2,12 +2,14 @@ import { createRouter, createWebHashHistory} from 'vue-router'
 import Login from "../components/Login.vue";
 import MainBox from "../components/MainBox.vue";
 import {useUserStore} from "../store/useUserStore.ts";
+import NoLoginSignActivity from "../components/NoLoginSignActivity.vue";
 
 
 
 const routes = [
     { path: '/', component: Login },
     { path: '/main', component: MainBox },
+    { path: '/noLoginSign', component: NoLoginSignActivity },
 ]
 
 export const router = createRouter({
@@ -20,7 +22,7 @@ router.beforeEach((to, from, next)=>{
     from
     // const { isGetterRouter } = useRouterStore()
     const {user} = useUserStore()
-    if (to.path === "/")
+    if (to.path === "/" || to.path==="/noLoginSign")
     {
         next()
     }else

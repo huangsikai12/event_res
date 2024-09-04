@@ -6,12 +6,25 @@ import {
     Button,
     Cell,
     CellGroup,
-    ContactCard, DatePicker,
+    ContactCard,
+    DatePicker,
     Field,
     Form,
-    List, Loading, NavBar,
-    NoticeBar, Popup,
-    PullRefresh, Stepper, Sticky, SwipeCell, Switch,
+    List,
+    Loading,
+    NavBar,
+    NoticeBar, Picker,
+    Popup,
+    PullRefresh,
+    Skeleton,
+    SkeletonAvatar,
+    SkeletonImage,
+    SkeletonParagraph,
+    SkeletonTitle,
+    Stepper,
+    Sticky,
+    SwipeCell,
+    Switch,
     Tab,
     Tabs,
     Tag,
@@ -43,5 +56,11 @@ app.use(DatePicker);
 app.use(Switch);
 app.use(Loading);
 app.use(SwipeCell);
+app.use(Skeleton);
+app.use(SkeletonTitle);
+app.use(SkeletonImage);
+app.use(SkeletonAvatar);
+app.use(SkeletonParagraph);
+app.use(Picker);
 app.use(createPinia().use(persist))
 app.mount('#app')

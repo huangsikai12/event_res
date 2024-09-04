@@ -29,7 +29,7 @@ const onSubmit = async (values: User) => {
   {
     showSuccessToast('登录成功');
     userStore.changeUser(res.data.data)
-    router.push("/main")
+    await router.push("/main")
 
   }
   else {
@@ -66,7 +66,7 @@ const onSubmit = async (values: User) => {
 
   </van-form>
   <div style="margin: 16px;">
-    <van-button round block type="primary" native-type="submit">
+    <van-button  @click="router.push('/noLoginSign')" round block type="primary" native-type="submit">
       无登录状态签到
     </van-button>
   </div>
