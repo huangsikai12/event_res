@@ -406,48 +406,55 @@ const copyUid=async () => {
           v-if="!loading"
           finished-text="没有更多了">
         <van-cell-group v-for="item in list" :key="item.id">
-          <van-cell >
-            <template #label>
-              地点：{{item.place}}
-              <br>
-              {{item.description}}
-            </template>
-            <template #title>
-              <span  style="margin-right: 10px" class="custom-title">{{item.title}}</span>
-              <van-tag type="primary">
-                {{ item.time.length<7?"长期活动":item.time }}
-              </van-tag>
-            </template>
-            <template  #right-icon>
-              <!--            <span style="margin-right: 10px">{{item.joinCount}}/{{item.totalCount}}</span>-->
-            </template>
-            <template #extra>
-
-            </template>
-          </van-cell>
-          <van-cell>
-            <template #title>
-              <van-button v-if="item.status !=0" disabled type="success">报名结束</van-button>
-              <template v-else>
-                <van-button v-if="!joinIdList.includes(item.id)" @click="joinActivity(item)" type="success" >点击报名</van-button>
-                <van-button v-else type="danger"  @click="cancelActivity(item)">取消报名</van-button>
-                <van-button v-if="user.roleId == 1" type="warning" @click="deleteActivity(item.id)">下架活动</van-button>
+          <van-swipe-cell>
+            <van-cell >
+              <template #label>
+                地点：{{item.place}}
+                <br>
+                {{item.description}}
               </template>
-              <van-button  v-if="user.roleId == 1" @click ="getEventJoinUser(item.id)" type="primary">查看报名</van-button>
-
-              <template v-if="item.status !=0 &&user.roleId==1">
-                <br >
-                <van-button  color="#7232dd" @click="getEventSignUser(item.id)">查看签到</van-button>
+              <template #title>
+                <span  style="margin-right: 10px" class="custom-title">{{item.title}}</span>
+                <van-tag type="primary">
+                  {{ item.time.length<7?"长期活动":item.time }}
+                </van-tag>
               </template>
-              <br>
+              <template  #right-icon>
+                <!--            <span style="margin-right: 10px">{{item.joinCount}}/{{item.totalCount}}</span>-->
+              </template>
+              <template #extra>
 
-              <van-button  v-if="item.status == 0 &&user.roleId==1" @click="setPwdShow = true;setPwdEventID=item.id" type="primary">设置签到码并开始</van-button>
-              <!--              <van-button v-if="item.status==0 &&user.roleId==1" type="warning" @click="chageActivityStatus(item.id,1,'开始活动')">开始活动</van-button>-->
-              <van-button v-if="item.status==1 &&user.roleId==1" @click="changeActivityStatus(item.id,2,'结束活动')" type="warning">结束活动</van-button>
-              <van-button v-if="item.status==2 &&user.roleId==1"  @click="changeActivityStatus(item.id,3,'同步活动')" type="warning">同步活动</van-button>
+              </template>
+            </van-cell>
+            <van-cell>
+              <template #title>
+                <van-button v-if="item.status !=0" disabled type="success">报名结束</van-button>
+                <template v-else>
+                  <van-button v-if="!joinIdList.includes(item.id)" @click="joinActivity(item)" type="success" >点击报名</van-button>
+                  <van-button v-else type="danger"  @click="cancelActivity(item)">取消报名</van-button>
+                  <van-button v-if="user.roleId == 1" type="warning" @click="deleteActivity(item.id)">下架活动</van-button>
+                </template>
+                <van-button  v-if="user.roleId == 1" @click ="getEventJoinUser(item.id)" type="primary">查看报名</van-button>
+
+                <template v-if="item.status !=0 &&user.roleId==1">
+                  <br >
+                  <van-button  color="#7232dd" @click="getEventSignUser(item.id)">查看签到</van-button>
+                </template>
+                <br>
+
+                <van-button  v-if="item.status == 0 &&user.roleId==1" @click="setPwdShow = true;setPwdEventID=item.id" type="primary">设置签到码并开始</van-button>
+                <!--              <van-button v-if="item.status==0 &&user.roleId==1" type="warning" @click="chageActivityStatus(item.id,1,'开始活动')">开始活动</van-button>-->
+                <van-button v-if="item.status==1 &&user.roleId==1" @click="changeActivityStatus(item.id,2,'结束活动')" type="warning">结束活动</van-button>
+                <van-button v-if="item.status==2 &&user.roleId==1"  @click="changeActivityStatus(item.id,3,'同步活动')" type="warning">同步活动</van-button>
+              </template>
+
+            </van-cell>
+            <template #right>
+              <van-button square type="danger" text="删除" />
+              <van-button square type="primary" text="收藏" />
             </template>
+          </van-swipe-cell>
 
-          </van-cell>
         </van-cell-group>
       </van-list>
     </van-pull-refresh>
