@@ -3,6 +3,7 @@ import Login from "../components/Login.vue";
 import MainBox from "../components/MainBox.vue";
 import {useUserStore} from "../store/useUserStore.ts";
 import NoLoginSignActivity from "../components/NoLoginSignActivity.vue";
+import Register from "../components/Register.vue";
 
 
 
@@ -10,7 +11,7 @@ const routes = [
     { path: '/', component: Login },
     { path: '/main', component: MainBox },
     { path: '/noLoginSign', component: NoLoginSignActivity },
-    { path: '/register', component: NoLoginSignActivity },
+    { path: '/register', component: Register },
 ]
 
 export const router = createRouter({
@@ -23,7 +24,7 @@ router.beforeEach((to, from, next)=>{
     from
     // const { isGetterRouter } = useRouterStore()
     const {user} = useUserStore()
-    if (to.path === "/" || to.path==="/noLoginSign " || to.path==="/register")
+    if (to.path == "/" || to.path==="/noLoginSign" || to.path==="/register")
     {
         next()
     }else

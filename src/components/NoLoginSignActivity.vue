@@ -5,7 +5,7 @@ import {onMounted, ref} from "vue";
 import axios from "axios";
 import {BASE_URL} from "../Constants.ts";
 import {Activity, GeneralOptionsInter, SelectedOptionsInter} from "../interface/DataInterface.ts";
-import {showFailToast, showToast} from "vant";
+import {showFailToast, showLoadingToast, showToast} from "vant";
 
 
 const uid = ref()
@@ -29,6 +29,7 @@ const onConfirm = ({ selectedOptions:selectedOptions}:SelectedOptionsInter) => {
   showPicker.value = false;
 };
 const onSubmit=async () => {
+  showLoadingToast("提交中......")
   const res =  await  axios.get(`${BASE_URL}/user/get?uid=${uid.value}`)
   const res2 =  await  axios.get(`${BASE_URL}/join/get/user?uid=${uid.value}&eid=${select_event.value.value}`)
   if (res.status ==200 && res2.status == 200)
@@ -52,6 +53,7 @@ const onSubmit=async () => {
 }
 
 const verSignPwd=async () => {
+  showLoadingToast("提交中......")
   if(signPwd.value=="")
   {
     showFailToast("签到码不能为空")
