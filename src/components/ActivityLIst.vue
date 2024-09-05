@@ -16,27 +16,33 @@ const longtimeActivity = ref(false)
 const date_result = ref("0");
 const time_result = ref<Array<number>>([0,0,0]);
 const showPicker = ref(false);
-const onConfirm = ({selectedValues:selectedValues}:DateTimePickerValue) =>{
-  date_result.value = selectedValues.join('-');
-  showPicker.value = false;
-};
-
 const setPwdEventID = ref("0")
 const joinIdList = ref<Array<string>>([])
 const list = ref<Array<Activity>>([]);
 const joinList = ref<Array<User>>([]);
 const newActivity = ref<Activity>(new Activity())
+const signPwd = ref("")
+const addActivityPop = ref(false)
+
+onMounted(async ()=>{
+  await getActivityList()
+  await getUserJoin()
+})
+
+const onConfirm = ({selectedValues:selectedValues}:DateTimePickerValue) =>{
+  date_result.value = selectedValues.join('-');
+  showPicker.value = false;
+};
 const getActivityList =async () => {
   const data = await axios.get(`${BASE_URL}/event/all`)
   console.log(data)
   if (data.data.data != null) {
     list.value = data.data.data.reverse()
   }
-  console.log(list)
+
 
 }
-const signPwd = ref("")
-const addActivityPop = ref(false)
+
 const getUserJoin =async () => {
 
   joinIdList.value = []
@@ -48,10 +54,7 @@ const getUserJoin =async () => {
   }
 
 }
-onMounted(async ()=>{
-  await getActivityList()
-  await getUserJoin()
-})
+
 
 const onRefresh= () => {
   console.log(222)
@@ -400,6 +403,7 @@ const copyUid=async () => {
         @refresh="onRefresh"
         success-text="刷新成功">
       <van-list
+
           v-if="!loading"
           finished-text="没有更多了">
         <van-cell-group v-for="item in list" :key="item.id">
@@ -455,6 +459,7 @@ const copyUid=async () => {
         </van-cell-group>
       </van-list>
     </van-pull-refresh>
+  <van-back-top />
 
 
 

@@ -8,8 +8,6 @@ const user = userStore.user
 
 const logOut = ()=>
 {
-  showSuccessToast("退出成功")
-  userStore.clearUser()
   router.push("/")
 }
 </script>

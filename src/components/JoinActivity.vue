@@ -110,7 +110,6 @@ const beforeSign=(item:Activity)=>{
       success-text="刷新成功">
   <van-list
       v-if="!loading"
-      v-model:loading="loading"
       :finished="finished"
       finished-text="没有更多了"
   >

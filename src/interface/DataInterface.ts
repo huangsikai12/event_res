@@ -11,14 +11,14 @@ export class Activity{
     "userStatus":number
 
 }
-export interface User
+export class User
 {
-    id:number;
-    name:string;
-    uid:string
-    phone:string;
-    pwd:string;
-    roleId:number;
+    "id":number;
+    "name":string;
+    "uid":string;
+    "phone":string;
+    "pwd":string;
+    "roleId":number;
 }
 export interface JoinedInfo
 {

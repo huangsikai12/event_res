@@ -7,19 +7,15 @@ import {showFailToast, showLoadingToast, showSuccessToast} from "vant";
 import axios from 'axios'
 import {BASE_URL} from "../Constants.ts";
 
-const uid = ref('');
-const pwd = ref('');
+const login_form = ref<User>(new User())
 const userStore = useUserStore()
-const onSubmit = async (values: User) => {
+const onSubmit = async () => {
   showLoadingToast({
     message: '加载中...',
     forbidClick: true,
     duration:10000
   })
-  const res = await axios.post(`${BASE_URL}/user/login`,{
-    uid:values.uid,
-    pwd:values.pwd
-  })
+  const res = await axios.post(`${BASE_URL}/user/login`,login_form.value)
       .catch(()=>{
         showFailToast('请求失败');
         return;
@@ -43,14 +39,15 @@ const onSubmit = async (values: User) => {
   <van-form @submit="onSubmit">
     <van-cell-group inset>
       <van-field
-          v-model="uid"
+          v-model="login_form.uid"
           name="uid"
           label="学号"
+          type="digit"
           placeholder="请输入学号"
           :rules="[{ required: true, message: '请填写学号' }]"
       />
       <van-field
-          v-model="pwd"
+          v-model="login_form.pwd"
           type="password"
           name="pwd"
           label="密码"
@@ -58,10 +55,21 @@ const onSubmit = async (values: User) => {
           :rules="[{ required: true, message: '请填写密码' }]"
       />
     </van-cell-group>
+
     <div style="margin: 16px;">
-      <van-button round block type="primary" native-type="submit">
-        登录
-      </van-button>
+      <van-row>
+        <van-col span="12">
+          <van-button round block type="success" native-type="submit">
+            登录
+          </van-button>
+        </van-col>
+
+        <van-col span="12">
+          <van-button round block type="primary" @click="router.push('/register')">
+            注册
+          </van-button>
+        </van-col>
+      </van-row>
     </div>
 
   </van-form>

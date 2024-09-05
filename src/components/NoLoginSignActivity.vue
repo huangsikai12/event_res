@@ -105,6 +105,7 @@ const verSignPwd=async () => {
           v-model="uid"
           name="uid"
           label="学号"
+          type="digit"
           placeholder="请输入学号"
           :rules="[{ required: true, message: '请填写学号' }]"
       />

@@ -3,9 +3,10 @@ import'vant/lib/index.css'
 import App from './App.vue'
 import persist from 'pinia-plugin-persistedstate'
 import {
+    BackTop,
     Button,
     Cell,
-    CellGroup,
+    CellGroup, Col,
     ContactCard,
     DatePicker,
     Field,
@@ -15,7 +16,7 @@ import {
     NavBar,
     NoticeBar, Picker,
     Popup,
-    PullRefresh,
+    PullRefresh, Row,
     Skeleton,
     SkeletonAvatar,
     SkeletonImage,
@@ -25,7 +26,7 @@ import {
     Sticky,
     SwipeCell,
     Switch,
-    Tab,
+    Tab, Tabbar, TabbarItem,
     Tabs,
     Tag,
     Toast
@@ -62,5 +63,10 @@ app.use(SkeletonImage);
 app.use(SkeletonAvatar);
 app.use(SkeletonParagraph);
 app.use(Picker);
+app.use(Col);
+app.use(Row);
+app.use(BackTop);
+app.use(Tabbar);
+app.use(TabbarItem);
 app.use(createPinia().use(persist))
 app.mount('#app')

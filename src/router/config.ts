@@ -4,6 +4,7 @@ import MainBox from "../components/MainBox.vue";
 import {useUserStore} from "../store/useUserStore.ts";
 import NoLoginSignActivity from "../components/NoLoginSignActivity.vue";
 import Register from "../components/Register.vue";
+import {showSuccessToast} from "vant";
 
 
 
@@ -21,9 +22,15 @@ export const router = createRouter({
 
 router.beforeEach((to, from, next)=>{
     //
-    from
-    // const { isGetterRouter } = useRouterStore()
     const {user} = useUserStore()
+
+    if (from.path == "/main" && to.path=="/")
+    {
+        showSuccessToast("您已退出登录")
+        useUserStore().clearUser()
+    }
+    // const { isGetterRouter } = useRouterStore()
+
     if (to.path == "/" || to.path==="/noLoginSign" || to.path==="/register")
     {
         next()
