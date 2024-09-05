@@ -69,7 +69,7 @@ const loading = ref(false);
 const finished = ref(true);
 const joinActivity=async (item: Activity) => {
   loading.value = true
-  const res = await axios.get(`${BASE_URL}/join/add?uid=${user.id}&eid=${item.id}`)
+  const res = await axios.get(`${BASE_URL}/join/add?uid=${user.uid}&eid=${item.id}`)
   if (res!=null)
   {
     showToast(`报名成功！`);
@@ -113,7 +113,7 @@ const setSignPwd=()=>{
 const cancelActivity=async (item: Activity) => {
   showLoadingToast("取消中......")
   loading.value = true
-  const res = await axios.get(`${BASE_URL}/join/cancel?uid=${user.id}&eid=${item.id}`)
+  const res = await axios.get(`${BASE_URL}/join/cancel?uid=${user.uid}&eid=${item.id}`)
   if (res != null) {
     showToast(`取消报名成功！`);
     await getActivityList()
@@ -459,7 +459,7 @@ const copyUid=async () => {
         </van-cell-group>
       </van-list>
     </van-pull-refresh>
-  <van-back-top />
+  <van-back-top right="1vh" bottom="8vh" />
 
 
 

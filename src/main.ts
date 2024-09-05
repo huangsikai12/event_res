@@ -21,10 +21,10 @@ import {
     SkeletonAvatar,
     SkeletonImage,
     SkeletonParagraph,
-    SkeletonTitle,
-    Stepper,
-    Sticky,
-    SwipeCell,
+    SkeletonTitle, Step,
+    Stepper, Steps,
+    Sticky, Swipe,
+    SwipeCell, SwipeItem,
     Switch,
     Tab, Tabbar, TabbarItem,
     Tabs,
@@ -68,5 +68,9 @@ app.use(Row);
 app.use(BackTop);
 app.use(Tabbar);
 app.use(TabbarItem);
+app.use(Swipe);
+app.use(SwipeItem);
+app.use(Step);
+app.use(Steps);
 app.use(createPinia().use(persist))
 app.mount('#app')

@@ -29,7 +29,7 @@ const getUserJoinActivity =async () => {
 
 
 const cancelActivity=async (item: Activity) => {
-  const res = await axios.get(`${BASE_URL}/join/cancel?uid=${user.id}&eid=${item.id}`)
+  const res = await axios.get(`${BASE_URL}/join/cancel?uid=${user.uid}&eid=${item.id}`)
   if (res != null) {
     showToast(`取消报名成功！`);
     await getUserJoinActivity()
