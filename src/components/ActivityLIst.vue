@@ -310,7 +310,7 @@ const copyUid=async () => {
           :finished="finished"
           finished-text="没有更多了"
       >
-        <van-cell v-for="item in joinList" :key="item.uid" :title="item.name">
+        <van-cell v-for="item in joinList" :key="item.uid" :title="item.name??item.uid">
           <template  #right-icon>
             <span style="margin-right: 10px">{{item.uid}}</span>
           </template>

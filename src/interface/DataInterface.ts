@@ -26,6 +26,7 @@ export interface JoinedInfo
     uid:string;
     eid:string;
     status:number;
+    title:string;
 }
 export interface DateTimePickerValue
 {

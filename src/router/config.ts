@@ -10,6 +10,7 @@ const routes = [
     { path: '/', component: Login },
     { path: '/main', component: MainBox },
     { path: '/noLoginSign', component: NoLoginSignActivity },
+    { path: '/register', component: NoLoginSignActivity },
 ]
 
 export const router = createRouter({
@@ -22,7 +23,7 @@ router.beforeEach((to, from, next)=>{
     from
     // const { isGetterRouter } = useRouterStore()
     const {user} = useUserStore()
-    if (to.path === "/" || to.path==="/noLoginSign")
+    if (to.path === "/" || to.path==="/noLoginSign " || to.path==="/register")
     {
         next()
     }else
