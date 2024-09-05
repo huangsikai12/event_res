@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {useUserStore} from "../store/useUserStore.ts";
 import {router} from "../router/config.ts";
-import {showSuccessToast} from "vant";
 
 const userStore = useUserStore()
 const user = userStore.user
