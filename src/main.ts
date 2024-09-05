@@ -10,7 +10,7 @@ import {
     ContactCard,
     DatePicker,
     Field,
-    Form,
+    Form, Grid, GridItem, Icon,
     List,
     Loading,
     NavBar,
@@ -72,5 +72,8 @@ app.use(Swipe);
 app.use(SwipeItem);
 app.use(Step);
 app.use(Steps);
+app.use(Grid);
+app.use(Icon);
+app.use(GridItem);
 app.use(createPinia().use(persist))
 app.mount('#app')

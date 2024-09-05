@@ -9,6 +9,10 @@
     <van-swipe-item>3</van-swipe-item>
     <van-swipe-item>4</van-swipe-item>
   </van-swipe>
+  <van-grid :gutter="10">
+    <van-grid-item v-for="value in 8" :key="value" icon="photo-o" text="文字" />
+  </van-grid>
+
 
 
 </template>
