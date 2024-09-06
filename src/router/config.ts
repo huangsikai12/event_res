@@ -28,6 +28,7 @@ router.beforeEach((to, from, next)=>{
     {
         showSuccessToast("您已退出登录")
         useUserStore().clearUser()
+        localStorage.clear()
     }
     // const { isGetterRouter } = useRouterStore()
 

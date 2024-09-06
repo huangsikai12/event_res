@@ -33,6 +33,7 @@ import {
 } from 'vant';
 import {router} from "./router/config.ts";
 import {createPinia} from "pinia";
+import './axios/config.ts'
 
 const app = createApp(App);
 app.use(List);
