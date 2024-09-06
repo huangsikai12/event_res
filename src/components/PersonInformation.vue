@@ -12,11 +12,22 @@ const logOut = ()=>
 </script>
 
 <template>
-  <van-contact-card  type="edit" :name="user.name" :tel="user.uid" :editable="false" />
+
+  <div>
+    <van-icon size="40" name="https://fastly.jsdelivr.net/npm/@vant/assets/icon-demo.png" />
+    学号：{{user.uid}}
+    <br>
+    姓名：{{user.name}}
+  </div>
+
   <van-button @click="logOut" type="primary" size="large">退出登录</van-button>
 
 </template>
 
 <style scoped>
+div
+{
+  margin: 10px;
+}
 
 </style>
