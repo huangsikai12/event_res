@@ -8,7 +8,7 @@ import { showConfirmDialog } from 'vant';
 import {BASE_URL} from "../Constants.ts";
 
 const userStore = useUserStore()
-const user = userStore.user
+const user = userStore.parseUser()
 const setPwdShow = ref(false)
 const setPeekJoinShow = ref(false)
 const setPeekSignShow = ref(false)
@@ -35,7 +35,6 @@ const onConfirm = ({selectedValues:selectedValues}:DateTimePickerValue) =>{
 };
 const getActivityList =async () => {
   const data = await axios.get(`${BASE_URL}/event/all`)
-  console.log(data)
   if (data.data.data != null) {
     list.value = data.data.data.reverse()
   }
@@ -57,7 +56,6 @@ const getUserJoin =async () => {
 
 
 const onRefresh= () => {
-  console.log(222)
    getActivityList()
    getUserJoin()
   loading.value = false

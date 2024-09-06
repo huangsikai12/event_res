@@ -24,9 +24,7 @@ const onSubmit = async () => {
       router.back()
     }else
     {
-
       showFailToast(res.data.msg)
-      console.log(res)
     }
   }
 

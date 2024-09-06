@@ -3,7 +3,7 @@ import {useUserStore} from "../store/useUserStore.ts";
 import {router} from "../router/config.ts";
 
 const userStore = useUserStore()
-const user = userStore.user
+const user = userStore.parseUser()
 
 const logOut = ()=>
 {

@@ -16,11 +16,6 @@ const onSubmit = async () => {
     duration:10000
   })
   const res = await axios.post(`${BASE_URL}/user/login`,login_form.value)
-      .catch(()=>{
-        showFailToast('请求失败');
-        return;
-
-      })
   if (res?.data.code == 200 )
   {
     showSuccessToast('登录成功');

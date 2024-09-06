@@ -14,7 +14,7 @@ import {
     List,
     Loading,
     NavBar,
-    NoticeBar, Picker,
+    NoticeBar, Notify, Picker,
     Popup,
     PullRefresh, Row,
     Skeleton,
@@ -76,5 +76,6 @@ app.use(Steps);
 app.use(Grid);
 app.use(Icon);
 app.use(GridItem);
+app.use(Notify);
 app.use(createPinia().use(persist))
 app.mount('#app')

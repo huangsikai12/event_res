@@ -6,8 +6,6 @@ import NoLoginSignActivity from "../components/NoLoginSignActivity.vue";
 import Register from "../components/Register.vue";
 import {showSuccessToast} from "vant";
 
-
-
 const routes = [
     { path: '/', component: Login },
     { path: '/main', component: MainBox },
@@ -22,7 +20,8 @@ export const router = createRouter({
 
 router.beforeEach((to, from, next)=>{
     //
-    const {user} = useUserStore()
+    const {parseUser} = useUserStore()
+    const user = parseUser()
 
     if (from.path == "/main" && to.path=="/")
     {
@@ -31,13 +30,15 @@ router.beforeEach((to, from, next)=>{
         localStorage.clear()
     }
     // const { isGetterRouter } = useRouterStore()
-
     if (to.path == "/" || to.path==="/noLoginSign" || to.path==="/register")
     {
         next()
     }else
     {
-        if (user.id === 0){
+
+
+
+        if (user.id ==undefined){
             next({
                 path:"/"
             })

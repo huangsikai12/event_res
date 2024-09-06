@@ -19,6 +19,7 @@ export class User
     "phone":string;
     "pwd":string;
     "roleId":number;
+    "token":string;
 }
 export interface JoinedInfo
 {
