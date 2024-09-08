@@ -6,7 +6,7 @@ import {useUserStore} from "../store/useUserStore.ts";
 import axios from "axios";
 import {BASE_URL} from "../Constants.ts";
 const userStore = useUserStore()
-const user = userStore.user
+const user = userStore.parseUser()
 const verPwdShow = ref(false)
 const signPwd = ref("")
 const signEventId = ref("0")
@@ -19,11 +19,9 @@ const finished = ref(true);
 const getUserJoinActivity =async () => {
 
   const res = await axios.get(`${BASE_URL}/join/get/user/detail?uid=${user.uid}`)
-  console.log(res)
   if (res.data.data != null) {
     list.value =res.data.data.reverse()
   }
-  console.log(list)
 
 }
 

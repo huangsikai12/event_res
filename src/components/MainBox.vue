@@ -34,6 +34,7 @@ import Home from "./Home.vue";
 const TopBarActive = ref(0);
 const BottomBarActive = ref(0);
 
-const {user} = useUserStore()
+const {parseUser} = useUserStore()
+const user = parseUser()
 
 </script>

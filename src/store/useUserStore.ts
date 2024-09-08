@@ -1,25 +1,37 @@
 import { defineStore } from 'pinia'
 import {ref} from "vue";
 import {User}from "../interface/DataInterface.ts";
+import {jwtDecode} from "jwt-decode";
 
 
-// useStore 可以是 useUser、useCart 之类的任何东西
-// 第一个参数是应用程序中 store 的唯一 id
 
 export const useUserStore = defineStore("user",()=>{
-    const user = ref<User>({name: "", uid: "", id: 0, phone: "", pwd: "", roleId: 0}) //全局可用
-
+    const userToken = ref<string>(localStorage.getItem("token")??"")
     const changeUser = (value:User)=>{
-        user.value = value
+        userToken.value = value.token
     }
     const clearUser = ()=>{
-            user.value = {name: "", uid: "", id: 0, phone: "", pwd: "", roleId: 0}
+        localStorage.clear()
     }
+    const parseUser =()=>
+    {
+        let user_json:string|undefined = ""
+        try {
+           user_json = jwtDecode(userToken.value).sub;
+        } catch (e) {
+            user_json = JSON.stringify(new User())
 
+        }
+        if (user_json!=undefined)
+        {
+            return JSON.parse(user_json)
+        }
+    }
     return {
-        user,
+        userToken,
         changeUser,
-        clearUser
+        clearUser,
+        parseUser
     }
 
 }

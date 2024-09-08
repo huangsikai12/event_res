@@ -14,7 +14,7 @@ import {
     List,
     Loading,
     NavBar,
-    NoticeBar, Picker,
+    NoticeBar, Notify, Picker,
     Popup,
     PullRefresh, Row,
     Skeleton,
@@ -33,6 +33,7 @@ import {
 } from 'vant';
 import {router} from "./router/config.ts";
 import {createPinia} from "pinia";
+import './axios/config.ts'
 
 const app = createApp(App);
 app.use(List);
@@ -75,5 +76,6 @@ app.use(Steps);
 app.use(Grid);
 app.use(Icon);
 app.use(GridItem);
+app.use(Notify);
 app.use(createPinia().use(persist))
 app.mount('#app')
