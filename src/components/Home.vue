@@ -37,7 +37,7 @@ const gridClick=(value:HomeGrid)=>{
     <van-swipe-item>4</van-swipe-item>
   </van-swipe>
   <van-grid :gutter="10">
-    <van-grid-item v-if="homeGrid.length>0" v-for="value in homeGrid" @click="gridClick(value)" :key="value" :icon="value.image" :text="value.title" />
+    <van-grid-item v-for="value in homeGrid" @click="gridClick(value)" :key="value.title" :icon="value.image" :text="value.title" />
   </van-grid>
 
 
