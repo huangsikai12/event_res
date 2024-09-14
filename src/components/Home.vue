@@ -31,10 +31,39 @@ const gridClick=(value:HomeGrid)=>{
 
 <template>
   <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" style="margin-bottom: 30px">
-    <van-swipe-item>1</van-swipe-item>
-    <van-swipe-item>2</van-swipe-item>
-    <van-swipe-item>3</van-swipe-item>
-    <van-swipe-item>4</van-swipe-item>
+    <van-swipe-item>
+      <van-image
+        width="100%"
+        height="100%"
+        fit="contain"
+        src="https://u.huangsikai.top:12543/down/0b4mW9yHJ2ch.jpg"
+    />
+      </van-swipe-item>
+    <van-swipe-item>
+      <van-image
+          width="100%"
+          height="100%"
+          fit="contain"
+          src="https://u.huangsikai.top:12543/down/UpbavhJk0rA7.jpg"
+      />
+    </van-swipe-item>
+    <van-swipe-item>
+      <van-image
+          width="100%"
+          height="100%"
+          fit="contain"
+          src="https://u.huangsikai.top:12543/down/IybIMKsU5rpN.jpg"
+      />
+    </van-swipe-item>
+    <van-swipe-item>
+      <van-image
+          width="100%"
+          height="100%"
+          fit="contain"
+          src="https://u.huangsikai.top:12543/down/JaDQLH74MX0S.jpg"
+      />
+    </van-swipe-item>
+
   </van-swipe>
   <van-grid :gutter="10">
     <van-grid-item v-for="value in homeGrid" @click="gridClick(value)" :key="value.title" :icon="value.image" :text="value.title" />
@@ -45,11 +74,5 @@ const gridClick=(value:HomeGrid)=>{
 </template>
 
 <style scoped>
-.my-swipe .van-swipe-item {
-  color: #fff;
-  font-size: 20px;
-  line-height: 150px;
-  text-align: center;
-  background-color: #39a9ed;
-}
+
 </style>

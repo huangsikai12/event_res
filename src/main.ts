@@ -31,6 +31,7 @@ import {
     Tag,
     Toast
 } from 'vant';
+import { Image as VanImage } from 'vant';
 import {router} from "./router/config.ts";
 import {createPinia} from "pinia";
 import './axios/config.ts'
@@ -77,5 +78,6 @@ app.use(Grid);
 app.use(Icon);
 app.use(GridItem);
 app.use(Notify);
+app.use(VanImage);
 app.use(createPinia().use(persist))
 app.mount('#app')
