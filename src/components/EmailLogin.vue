@@ -33,6 +33,7 @@ const onSubmit = async () => {
 };
 
 const sendEmail = async (email: string) => {
+  console.log(email)
   // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   // if (email == undefined) {
   //   showFailToast("邮箱不能为空")
