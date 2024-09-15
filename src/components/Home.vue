@@ -36,7 +36,7 @@ const gridClick=(value:HomeGrid)=>{
         width="100%"
         height="100%"
         fit="contain"
-        src="https://u.huangsikai.top:12543/down/0b4mW9yHJ2ch.jpg"
+        src="https://image.huangsikai.top/guide_1.jpg"
     />
       </van-swipe-item>
     <van-swipe-item>
@@ -44,7 +44,7 @@ const gridClick=(value:HomeGrid)=>{
           width="100%"
           height="100%"
           fit="contain"
-          src="https://u.huangsikai.top:12543/down/UpbavhJk0rA7.jpg"
+          src="https://image.huangsikai.top/guide_2.jpg"
       />
     </van-swipe-item>
     <van-swipe-item>
@@ -52,7 +52,7 @@ const gridClick=(value:HomeGrid)=>{
           width="100%"
           height="100%"
           fit="contain"
-          src="https://u.huangsikai.top:12543/down/IybIMKsU5rpN.jpg"
+          src="https://image.huangsikai.top/guide_3.jpg"
       />
     </van-swipe-item>
     <van-swipe-item>
@@ -60,7 +60,7 @@ const gridClick=(value:HomeGrid)=>{
           width="100%"
           height="100%"
           fit="contain"
-          src="https://u.huangsikai.top:12543/down/JaDQLH74MX0S.jpg"
+          src="https://image.huangsikai.top/guide_4.jpg"
       />
     </van-swipe-item>
 
