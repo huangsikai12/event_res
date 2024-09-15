@@ -1,12 +1,13 @@
 <script setup lang="ts">
 
-import {useUserStore} from "../store/useUserStore";
+
 import {User} from "../interface/DataInterface";
 import axios from "axios";
 import {showFailToast, showLoadingToast, showSuccessToast} from "vant";
 import {BASE_URL} from "../Constants";
 import {router} from "../router/config";
 import {ref} from "vue";
+import {useUserStore} from "../store/useUserStore.ts";
 
 const login_form = ref<User>(new User())
 const userStore = useUserStore()
@@ -19,11 +20,16 @@ const onSubmit = async () => {
     forbidClick: true,
     duration:10000
   })
-  const res = await axios.post(`${BASE_URL}/user/login`,login_form.value)
+  const res = await axios.post(`${BASE_URL}/email/verCode/${email_verPwd.value}`,{
+    uid:"0",
+    email: login_form.value.phone,
+    action:1
+  })
+  console.log(res)
   if (res?.data.code == 200 )
   {
     showSuccessToast('登录成功');
-    userStore.changeUser(res.data.data)
+    userStore.setUserToken(res.data.data)
     await router.push("/main")
 
   }
@@ -33,33 +39,44 @@ const onSubmit = async () => {
 };
 
 const sendEmail = async (email: string) => {
-  console.log(email)
-  // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  // if (email == undefined) {
-  //   showFailToast("邮箱不能为空")
-  //   return
-  // }
-  // if (!emailRegex.test(email)) {
-  //   showFailToast("邮箱不符合规定！")
-  //   return
-  // }
-  // send_email_status.value = 1
-  // const res = await axios.post(`${BASE_URL}/email/sendCode`, {
-  //   uid: "",
-  //   email: email,
-  //   action:1
-  // })
-  // if (res.data != null && res.data.code == 200) {
-  //   showSuccessToast("发送成功")
-  //   send_email_status.value = 2
-  //   startCountdown(1)
-  //
-  // } else {
-  //   send_email_status.value = 0
-  //   showFailToast(res.data==null?"发送失败":res.data.msg)
-  // }
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (email == undefined) {
+    showFailToast("邮箱不能为空")
+    return
+  }
+  if (!emailRegex.test(email)) {
+    showFailToast("邮箱不符合规定！")
+    return
+  }
+  send_email_status.value = 1
+  const res = await axios.post(`${BASE_URL}/email/sendCode`, {
+    uid:"0",
+    email: email,
+    action:1
+  })
+  if (res.data != null && res.data.code == 200) {
+    showSuccessToast("发送成功")
+    send_email_status.value = 2
+    startCountdown(1)
+
+  } else {
+    send_email_status.value = 0
+    showFailToast(res.data==null?"发送失败":res.data.msg)
+  }
 
 
+}
+
+function startCountdown(minutes: number) {
+  secondsLeft.value = minutes * 60;
+  const countdownTimer = setInterval(() => {
+    if (secondsLeft.value <= 0) {
+      send_email_status.value = 0
+      clearInterval(countdownTimer);
+    } else {
+      secondsLeft.value -= 1;
+    }
+  }, 1000);
 }
 
 </script>

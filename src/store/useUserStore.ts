@@ -10,6 +10,10 @@ export const useUserStore = defineStore("user",()=>{
     const changeUser = (value:User)=>{
         userToken.value = value.token
     }
+
+    const setUserToken = (value:string)=>{
+        userToken.value = value
+    }
     const clearUser = ()=>{
         localStorage.clear()
     }
@@ -31,7 +35,8 @@ export const useUserStore = defineStore("user",()=>{
         userToken,
         changeUser,
         clearUser,
-        parseUser
+        parseUser,
+        setUserToken
     }
 
 }

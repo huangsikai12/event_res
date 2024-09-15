@@ -68,11 +68,11 @@ const onSubmit = async () => {
     </div>
 
   </van-form>
-<!--  <div style="margin: 16px;">-->
-<!--    <van-button  @click="router.push('/emailLogin')" round block type="primary" native-type="submit">-->
-<!--      邮箱验证码登录-->
-<!--    </van-button>-->
-<!--  </div>-->
+  <div style="margin: 16px;">
+    <van-button  @click="router.push('/emailLogin')" round block type="primary" native-type="submit">
+      邮箱验证码登录
+    </van-button>
+  </div>
   <div style="margin: 16px;">
     <van-button  @click="router.push('/noLoginSign')" round block type="primary" native-type="submit">
       无登录状态签到
