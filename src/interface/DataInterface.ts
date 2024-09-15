@@ -20,6 +20,7 @@ export class User
     "pwd":string;
     "roleId":number;
     "token":string;
+
 }
 export interface JoinedInfo
 {

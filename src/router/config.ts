@@ -5,12 +5,14 @@ import {useUserStore} from "../store/useUserStore.ts";
 import NoLoginSignActivity from "../components/NoLoginSignActivity.vue";
 import Register from "../components/Register.vue";
 import {showSuccessToast} from "vant";
+import EmailLogin from "../components/EmailLogin.vue";
 
 const routes = [
     { path: '/', component: Login },
     { path: '/main', component: MainBox },
     { path: '/noLoginSign', component: NoLoginSignActivity },
     { path: '/register', component: Register },
+    { path: '/emailLogin', component: EmailLogin },
 ]
 
 export const router = createRouter({
@@ -30,7 +32,7 @@ router.beforeEach((to, from, next)=>{
         localStorage.clear()
     }
     // const { isGetterRouter } = useRouterStore()
-    if (to.path == "/" || to.path==="/noLoginSign" || to.path==="/register")
+    if (to.path == "/" || to.path==="/noLoginSign" || to.path==="/register"  || to.path==="/emailLogin")
     {
         next()
     }else
