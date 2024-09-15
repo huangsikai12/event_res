@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {useUserStore} from "../store/useUserStore.ts";
 import {router} from "../router/config.ts";
+import {User} from "../interface/DataInterface.ts";
 
 const userStore = useUserStore()
-const user = userStore.parseUser()
+const user:User = userStore.parseUser()
 
 const logOut = ()=>
 {
@@ -13,14 +14,22 @@ const logOut = ()=>
 
 <template>
 
+    <van-image
+        round
+        width="10rem"
+        height="10rem"
+        src="https://image.huangsikai.top/logo.jpeg"
+        style="display:block; margin:auto;"
+    />
+
   <div>
-    <van-icon size="40" name="https://fastly.jsdelivr.net/npm/@vant/assets/icon-demo.png" />
     学号：{{user.uid}}
     <br>
     姓名：{{user.name}}
   </div>
 
-  <van-button @click="logOut" type="primary" size="large">退出登录</van-button>
+  <van-button round @click="logOut" type="primary" size="large" style="margin-bottom: 10px">退出登录</van-button>
+  <van-button round v-if="user.roleId==1" @click="" type="primary" size="large">查看用户密码</van-button>
 
 </template>
 
