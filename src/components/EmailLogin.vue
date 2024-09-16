@@ -29,7 +29,7 @@ const onSubmit = async () => {
   if (res?.data.code == 200 )
   {
     showSuccessToast('登录成功');
-    userStore.setUserToken(res.data.data)
+    userStore.changeUser(res.data.data)
     await router.push("/main")
 
   }
