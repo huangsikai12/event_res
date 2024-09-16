@@ -31,6 +31,13 @@ const onSubmit = async () => {
 </script>
 
 <template>
+  <van-image
+      round
+      width="10rem"
+      height="10rem"
+      src="https://image.huangsikai.top/logo.jpeg"
+      style="display:block; margin:auto;"
+  />
   <van-form @submit="onSubmit">
     <van-cell-group inset>
       <van-field
@@ -78,6 +85,7 @@ const onSubmit = async () => {
       无登录状态签到
     </van-button>
   </div>
+
 </template>
 
 <style scoped>

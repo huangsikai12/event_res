@@ -3,12 +3,12 @@ import'vant/lib/index.css'
 import App from './App.vue'
 import persist from 'pinia-plugin-persistedstate'
 import {
-    BackTop,
+    BackTop, Badge,
     Button,
     Cell,
     CellGroup, Col,
     ContactCard,
-    DatePicker,
+    DatePicker, Divider,
     Field,
     Form, Grid, GridItem, Icon,
     List,
@@ -45,6 +45,8 @@ app.use(CellGroup)
 app.use(Cell)
 app.use(Tag)
 app.use(PullRefresh);
+app.use(Divider);
+app.use(Badge);
 app.use(Toast);
 app.use(NoticeBar);
 app.use(ContactCard);

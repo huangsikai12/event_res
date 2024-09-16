@@ -18,7 +18,6 @@ onMounted(async ()=>{
   if (res.data!=null)
   {
     homeGrid.value = res.data.data
-    console.log(homeGrid)
   }
 })
 const gridClick=(value:HomeGrid)=>{
@@ -46,9 +45,11 @@ const gridClick=(value:HomeGrid)=>{
     />
       </van-swipe-item>
   </van-swipe>
+  <van-divider>导航区</van-divider>
   <van-grid :gutter="10">
     <van-grid-item v-for="value in homeGrid" @click="gridClick(value)" :key="value.title" :icon="value.image" :text="value.title" />
   </van-grid>
+
 
 
 

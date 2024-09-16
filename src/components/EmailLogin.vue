@@ -82,6 +82,13 @@ function startCountdown(minutes: number) {
 </script>
 
 <template>
+  <van-image
+      round
+      width="10rem"
+      height="10rem"
+      src="https://image.huangsikai.top/logo.jpeg"
+      style="display:block; margin:auto;"
+  />
   <van-form @submit="onSubmit">
     <van-cell-group inset>
       <van-field

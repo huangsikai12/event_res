@@ -83,6 +83,13 @@ const verSignPwd=async () => {
 </script>
 
 <template>
+  <van-image
+      round
+      width="10rem"
+      height="10rem"
+      src="https://image.huangsikai.top/logo.jpeg"
+      style="display:block; margin:auto;"
+  />
   <van-popup
       v-model:show="verPwdShow"
       closeable
