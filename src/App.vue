@@ -11,8 +11,9 @@
 <script setup lang="ts">
 
 import {onMounted, ref} from "vue";
+import {router} from "./router/config.ts";
 const isOnline = ref(true)
-const onClickLeft = () => history.back();
+const onClickLeft = () => router.back();
 onMounted(()=>{
   checkNetworkStatus();
   window.addEventListener('online', checkNetworkStatus);
