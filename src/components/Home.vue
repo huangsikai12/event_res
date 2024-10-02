@@ -39,14 +39,13 @@ const gridClick=(value:HomeGrid)=>{
     <van-swipe-item v-for="image in guideImage">
       <van-image
         width="100%"
-        height="80%"
-        fit="cover"
+        height="50%"
         :src="image"
     />
       </van-swipe-item>
   </van-swipe>
   <van-divider>导航区</van-divider>
-  <van-grid :gutter="10">
+  <van-grid :gutter="10" style="margin-bottom: 100px">
     <van-grid-item v-for="value in homeGrid" @click="gridClick(value)" :key="value.title" :icon="value.image" :text="value.title" />
   </van-grid>
 
