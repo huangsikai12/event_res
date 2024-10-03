@@ -29,7 +29,7 @@ const logOut = ()=>
   </div>
 
   <van-button round @click="logOut" type="primary" size="large" style="margin-bottom: 10px">退出登录</van-button>
-  <van-button round v-if="user.roleId==1" @click="" type="primary" size="large">查看用户密码</van-button>
+
 
 </template>
 
