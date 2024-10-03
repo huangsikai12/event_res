@@ -82,7 +82,7 @@ const deleteSign=async (uid: string, eid: string) => {
 
 </template>
 
-<style scoped>
+<style>
 van-button{
   margin: 5px;
 }

@@ -90,7 +90,7 @@ const setSignPwd=()=>{
   })
       .then(async () => {
         showLoadingToast("设置中......")
-        const res = await axios.post(`${BASE_URL}/event/setSignPwd/${setPwdEventID.value}?signPwd=${signPwd.value}`, user)
+        const res = await axios.post(`${BASE_URL}/event/setSignPwd/${setPwdEventID.value}?signPwd=${signPwd.value}`)
         if (res.data!= null)
         {
           showToast(res.data.msg+"活动已开始!")
@@ -228,7 +228,7 @@ const deleteActivity =(id:string)=>{
   })
       .then(async () => {
         showLoadingToast("删除中......")
-        const res = await axios.post(`${BASE_URL}/event/delete/${id}`, user)
+        const res = await axios.post(`${BASE_URL}/event/delete/${id}`)
         if (res.data!= null)
         {
           showToast(res.data.msg)
