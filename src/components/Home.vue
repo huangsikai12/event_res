@@ -22,7 +22,6 @@ onMounted(async ()=>{
 })
 const gridClick=(value:HomeGrid)=>{
   const actions = value.action.split("://")
-  console.log(actions[0])
   if (actions[0] == "external")
   {
     window.location.href= "https://"+actions[1]

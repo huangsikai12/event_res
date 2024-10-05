@@ -6,6 +6,7 @@ import {
     BackTop, Badge,
     Button,
     Cell,
+    Search,
     CellGroup, Col,
     ContactCard,
     DatePicker, Divider,
@@ -82,4 +83,5 @@ app.use(GridItem);
 app.use(Notify);
 app.use(VanImage);
 app.use(createPinia().use(persist))
+app.use(Search);
 app.mount('#app')

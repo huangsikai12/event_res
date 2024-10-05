@@ -258,11 +258,27 @@ const copyUid=async () => {
     }
   }
 }
+const search = ref("")
+const onSearch = async ()=>
+{
+  await getActivityList()
+  list.value = list.value.filter(acivity => acivity.title.includes(search.value))
+}
 
 </script>
 
 <template>
+  <form action="/">
+    <van-search
+        v-model="search"
+        show-action
+        placeholder="请输入搜索关键词"
+        @search="onSearch"
+        @cancel="getActivityList"
 
+
+    />
+  </form>
   <van-popup
       v-model:show="setPeekSignShow"
       closeable

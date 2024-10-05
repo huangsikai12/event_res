@@ -43,9 +43,10 @@ export interface GeneralOptionsInter
     text:string,
     value:string,
 }
-export interface HomeGrid
+export class HomeGrid
 {
-    title:string;
-    image:string;
-    action:string;
+    "id":number;
+    "title":string;
+    "image":string;
+    "action":string;
 }
