@@ -73,6 +73,7 @@ const modifyHomeGrid=async ()=>
     showFailToast("操作失败")
   }
   await getHomeGrids()
+  selectHomeGrid.value = new HomeGrid()
   modifyHomeGridShow.value = false
 
 }
