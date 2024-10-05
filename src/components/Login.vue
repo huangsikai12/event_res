@@ -82,7 +82,7 @@ const onSubmit = async () => {
   </div>
   <div style="margin: 16px;">
     <van-button  @click="router.push('/noLoginSign')" round block type="primary" native-type="submit">
-      无登录状态签到
+      临时签到
     </van-button>
   </div>
 
