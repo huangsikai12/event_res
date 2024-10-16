@@ -75,6 +75,7 @@ app.use(Tabbar);
 app.use(TabbarItem);
 app.use(Swipe);
 app.use(SwipeItem);
+app.use(Badge);
 app.use(Step);
 app.use(Steps);
 app.use(Grid);

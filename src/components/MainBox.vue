@@ -12,11 +12,13 @@
       <van-tab title="已报名活动"><JoinActivity></JoinActivity></van-tab>
       <van-tab v-if="user.roleId == 1" title="核验未登录签到"><CheckNoSign></CheckNoSign></van-tab>
     </van-tabs>
-    <PersonInformation v-if="BottomBarActive==2"></PersonInformation>
-    <Manage v-if="BottomBarActive==3"></Manage>
+    <Notification v-if="BottomBarActive==2"></Notification>
+    <PersonInformation v-if="BottomBarActive==3"></PersonInformation>
+    <Manage v-if="BottomBarActive==4"></Manage>
     <van-tabbar v-model="BottomBarActive">
       <van-tabbar-item icon="home-o">首页</van-tabbar-item>
       <van-tabbar-item icon="tosend">活动</van-tabbar-item>
+      <van-tabbar-item icon="chat-o"  badge="1">通知</van-tabbar-item>
       <van-tabbar-item icon="manager-o">我的</van-tabbar-item>
       <template v-if="user.roleId == 1">
         <van-tabbar-item icon="setting-o">管理</van-tabbar-item>
@@ -38,6 +40,7 @@ import Home from "./Home.vue";
 import axios from "axios";
 import {BASE_URL} from "../Constants.ts";
 import Manage from "./Manage.vue";
+import Notification from "./Notification.vue";
 const TopBarActive = ref(0);
 const BottomBarActive = ref(0);
 const TopText = ref("")
