@@ -26,6 +26,8 @@ const logOut = ()=>
     学号：{{user.uid}}
     <br>
     姓名：{{user.name}}
+    <br>
+    部门：{{user.departId}}
   </div>
 
   <van-button round @click="logOut" type="primary" size="large" style="margin-bottom: 10px">退出登录</van-button>
