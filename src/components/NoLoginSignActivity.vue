@@ -30,15 +30,15 @@ const onConfirm = ({ selectedOptions:selectedOptions}:SelectedOptionsInter) => {
 };
 const onSubmit=async () => {
   showLoadingToast("提交中......")
-  const res =  await  axios.get(`${BASE_URL}/user/get?uid=${uid.value}`)
+  // const res =  await  axios.get(`${BASE_URL}/user/get?uid=${uid.value}`)
   const res2 =  await  axios.get(`${BASE_URL}/join/get/user?uid=${uid.value}&eid=${select_event.value.value}`)
-  if (res.status ==200 && res2.status == 200)
+  if ( res2.status == 200)
   {
-    if (res.data.code !=404)
-    {
-      showFailToast("学号存在，此功能禁止")
-      return
-    }
+    // if (res.data.code !=404)
+    // {
+    //   showFailToast("学号存在，此功能禁止")
+    //   return
+    // }
     if (res2.data.data.length !=0)
     {
       showFailToast("您已经签到过了！")

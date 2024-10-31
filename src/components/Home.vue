@@ -10,6 +10,7 @@ const guideImage :Array<string>= [
     "https://image.huangsikai.top/guide_2.jpg",
     "https://image.huangsikai.top/guide_3.jpg",
     "https://image.huangsikai.top/guide_4.jpg",
+    "https://image.huangsikai.top/guide_5.jpg",
 ]
 
 onMounted(async ()=>{
